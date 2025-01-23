@@ -80,7 +80,7 @@ exports.postSignup = async (req, res, next) => {
     validationErrors.push({
       msg: "Password must be at least 8 characters long",
     });
-  if (req.body.password !== req.body.confirmPassword)
+  if (req.body.password !== req.body.confirm_password)
     validationErrors.push({ msg: "Passwords do not match" });
 
   if (validationErrors.length) {
@@ -92,7 +92,7 @@ exports.postSignup = async (req, res, next) => {
   });
 
   const user = new User({
-    userName: req.body.userName,
+    userName: req.body.username,
     email: req.body.email,
     password: req.body.password,
   });

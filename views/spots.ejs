@@ -81,7 +81,7 @@
         <% comments.forEach(comment => { %>
         <div class="card border-t border-gray-600 pt-2">
           <div class="card-body py-1">
-            <p class="card-text text-white mb-3"><%= comment.text %></p>
+            <p class="card-text text-white text-base mb-3"><%= comment.text %></p>
 
             <% if (comment.images && comment.images.length > 0) { %>
             <div class="flex flex-wrap mt-2 mb-3">
@@ -93,7 +93,7 @@
             </div>
             <% } %>
 
-            <p class="card-text text-gray-100"><small>Posted by <%= comment.user.userName %> on <%= comment.createdAt.toDateString() %></small></p>
+            <p class="card-text text-sm text-gray-100"><small>Posted by <%= comment.user.userName %> on <%= comment.createdAt.toDateString() %></small></p>
 
             <div class="flex space-x-2 mt-2">
               <form action="/comments/like/<%= comment._id %>" method="POST">
