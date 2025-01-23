@@ -1,0 +1,24 @@
+.card-img-top {
+    width: 300px !important;
+    height: 200px !important;
+    object-fit: cover; /* Optional: to maintain aspect ratio */
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main {
+    flex: 1;
+  }
+  
+  footer {
+    margin: 0;
+    padding: 0;
+  }

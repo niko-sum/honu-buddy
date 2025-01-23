@@ -1,0 +1,126 @@
+<%- include('partials/header') -%>
+<main class="container mx-auto mt-5">
+  <div class="flex justify-center">
+    <div class="w-full max-w-3xl">
+      <div class="card">
+        <div class="flex justify-center mb-2 ">
+          <img src="<%= spot.img %>" class="w-full h-auto object-cover rounded-lg shadow-lg" alt="<%= spot.name %>">
+        </div>
+        <div class="card-body bg-gray-100 rounded-lg shadow-lg">
+          <h1 class="text-2xl font-bold text-blue-700 "><%= spot.name %></h1>
+          <p class="py-2 text-gray-700 dark:text-gray-600"><%= spot.desc %></p>
+          <div class="flex items-center mt-4 text-blue-700 ">
+            <i class="fa-solid fa-location-dot w-6"></i>
+
+            <h1 class="px-2 text-base font-bold hover:underline transition-all duration-300"><a href="<%= spot.url%>"
+                target="_blank"><%= spot.location%></h1><span>(Click for Google Maps directions)</span></a>
+          </div>
+
+          <% if (weather !== null) { %>
+          <div class="flex items-center mt-4 text-gray-700 dark:text-gray-600">
+            <i class="fa-solid fa-temperature-high w-6"></i>
+            <h1 class="px-2 text-sm">Air Temperature: <span
+                class="font-bold text-base"><%= celsiusToFar(weather.temperature) %>°F </span></span></h1>
+          </div>
+          <div class="flex items-center mt-4 text-gray-700 dark:text-gray-600">
+            <i class="fa-solid fa-water w-6"></i>
+            <h1 class="px-2 text-sm">Wave Height: <span
+                class="font-bold text-base"><%= metersToFeet(weather.waveHeight) %>ft.</span></h1>
+          </div>
+          <div class="flex items-center mt-4 text-gray-700 dark:text-gray-600">
+            <i class="fa-solid fa-wind w-6"></i>
+            <h1 class="px-2 text-sm">Winds: <span class="font-bold text-base"><%= kmToMiles(weather.windSpeed) %>
+                mph
+                <%= getWindDirection(weather.windDirection) %> </span></h1>
+          </div>
+          <div class="flex items-center mt-4 text-gray-700 dark:text-gray-600">
+            <i class="fa-solid fa-cloud-showers-water w-6"></i>
+            <h1 class="px-2 text-sm">Preciptation: <span
+                class="font-bold text-base"><%= weather.precipitation %>%</span></h1>
+          </div>
+          <% } else { %>
+          <p class="text-sm text-white text-center mt-4">Weather data unavailable</p>
+          <% } %>
+          <div>
+            <h1 class="text-2xl font-bold text-blue-700 mt-4 ">How to get there</h1>
+            <p class="py-2 text-gray-700 dark:text-gray-600"><%= spot.dir %></p>
+          </div>
+          <a href="/" class="btn btn-primary">Back to Home</a>
+        </div>
+      </div>
+      <div class="mt-4">
+        <% if (user) { %>
+        <h2 class="text-white">Add a comment</h2>
+        <form action="/comments/<%= spot.id %>" method="POST" enctype="multipart/form-data">
+          <div class="form-group text-white">
+            <textarea 
+              name="text" 
+              class="form-control text-white mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-32 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" 
+              placeholder="Add a comment" 
+              required
+            ></textarea>
+          </div>
+          <div class="form-group mt-2">
+            <label class="text-white">Upload an Image (Optional):</label>
+            <input 
+              type="file" 
+              name="images" 
+              class="form-control text-white"
+              accept="image/*"
+              multiple
+            >
+          </div>
+          <button type="submit" class="btn btn-primary mt-2">Submit Comment</button>
+        </form>
+        <% } else { %>
+        <p class="text-white"><a href="/login">Log in</a> to add a comment.</p>
+        <% } %>
+      </div>
+      <div class="mt-4">
+        <h3 class="text-white">Community Comments</h3>
+        <% comments.forEach(comment => { %>
+        <div class="card border-t border-gray-600 pt-2">
+          <div class="card-body py-1">
+            <p class="card-text text-white mb-3"><%= comment.text %></p>
+
+            <% if (comment.images && comment.images.length > 0) { %>
+            <div class="flex flex-wrap mt-2 mb-3">
+              <% comment.images.forEach(image => { %>
+              <a href="<%= image.url %>" target="_blank" class="block">
+                <img src="<%= image.url %>" alt="Comment Image" class="w-32 h-32 object-cover rounded-lg mr-2 mb-2 hover:opacity-80 transition-opacity">
+              </a>
+              <% }) %>
+            </div>
+            <% } %>
+
+            <p class="card-text text-gray-100"><small>Posted by <%= comment.user.userName %> on <%= comment.createdAt.toDateString() %></small></p>
+
+            <div class="flex space-x-2 mt-2">
+              <form action="/comments/like/<%= comment._id %>" method="POST">
+                <button type="submit" class="btn btn-link text-gray-100">Like (<%= comment.likes %>)</button>
+              </form>
+              <% if (user && user._id.toString() === comment.user._id.toString()) { %>
+              <form action="/comments/delete/<%= comment._id %>" method="POST">
+                <button type="submit" class="btn btn-link text-danger text-gray-100">Delete</button>
+              </form>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      
+    </div>
+  </div>
+</main>
+<%- include('partials/footer') -%>
+
+<script>
+// Add client-side logging
+document.querySelector('form').addEventListener('submit', function(e) {
+  console.log('Form submitted');
+  const formData = new FormData(this);
+  console.log('Text:', formData.get('text'));
+  console.log('Image:', formData.get('images'));
+});
+</script>

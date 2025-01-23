@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: MegalopolisExtra-Regular
+font link: http://www.smeltery.net/en/fonts/megalopolis-extra
+font author: SMeltery
+font author site: http://www.smeltery.net/en/
+
+
+icon designer: Martin Smith
+icon designer link: /Mahat777
+        
+{"bg-gradient-0":"#D0A070","bg-gradient-1":"#6BE371","icon":"#ffffff","font":"#ffffff","slogan":"#ffffff"}
+      

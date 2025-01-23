@@ -1,11 +1,123 @@
 <%- include('partials/header') -%>
 
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
+<main class="mx-auto mt-5">
+  <div class="container px-6 py-16 mx-auto">
+    <div class="items-center lg:flex">
+      <div class="w-full lg:w-1/2">
+        <div class="lg:max-w-lg">
+          <h1 class="text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl">Your local guide to <br> Maui
+            <span class="text-blue-600 ">snorkeling</span>
+          </h1>
+
+          <p class="mt-3 text-gray-600 dark:text-white">Check marine weather conditions and local tips for popular Maui
+            spots, all in
+            one website. Help maintain our oceans by following safety guidelines contributed by our community.</p>
+
+          <button 
+            id="viewSnorkelingSpots"
+            class="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white uppercase transition-colors duration-300 transform bg-blue-600 rounded-lg lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">View
+            Snorkeling Spots</button>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2">
+        <img class="w-full h-auto rounded-lg shadow-2xl transform transition-transform duration-300 hover:scale-105"
+          style="box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 10px 15px rgba(0, 0, 0, 0.1); background: linear-gradient(to bottom, #ffffff, #f8f9fa);"
+          src="/imgs/snorkeling3.jpg" alt="Catalogue-pana.svg">
+      </div>
     </div>
+  </div>
+
+  <section
+    class="w-full bg-gradient-to-r from-green-500 via-fuchsia-500 to-emerald-500 lg:py-12 lg:flex lg:justify-center">
+    <div
+      class="overflow-hidden bg-white dark:bg-gray-900 lg:mx-8 lg:flex lg:max-w-6xl lg:w-full lg:shadow-md lg:rounded-xl">
+      <div class="lg:w-1/2">
+        <div class="h-64 bg-cover lg:h-full" style="background-image:url('/imgs/reef1.png')">
+        </div>
+      </div>
+
+      <div class="max-w-xl px-6 py-12 lg:max-w-5xl lg:w-1/2">
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl">
+          Is your sunscreen <span class="text-fuchsia-500">Reefsafe?</span>
+        </h2>
+
+        <p class="mt-4 text-gray-500 dark:text-gray-300">
+          Did you know that only Titanium Dioxide and Zinc Oxide based suncreens are safe to use in our oceans? Help us
+          keep
+          our reefs alive by using the right products. Check out our snorkeling and ocean safety guidlines to
+          live by and more.
+        </p>
+
+        <div class="inline-flex w-full mt-6 sm:w-auto">
+          <a href="/snorkelguide"
+            class="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white uppercase transition-colors duration-300 transform bg-blue-600 rounded-lg lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Merakui cards -->
+  <div id="snorkelingCards" class="flex flex-wrap justify-center mt-12 mb-12">
+    <% spots.forEach((spot, index) => { %>
+    <div
+      class="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg bg-white m-4 shadow-2xl transform transition-transform duration-300 hover:scale-105"
+      style="box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 10px 15px rgba(0, 0, 0, 0.1);">
+      <a href="/spots/<%= spot.id %>"><img class="object-cover object-center w-full h-56" src="<%= spot.img %>"
+          alt="<%= spot.name %>"></a>
+
+
+      <div class="px-6 py-4">
+        <h1 class="text-2xl font-bold text-blue-700 "><%= spot.name %></h1>
+
+        <p class="py-2 text-gray-700 dark:text-gray-600"><%= spot.desc %></p>
+
+        <div class="flex items-center mt-4 text-blue-700 ">
+          <i class="fa-solid fa-location-dot w-6"></i>
+
+          <h1 class="px-2 text-base font-bold hover:underline transition-all duration-300"><a href="<%= spot.url%>"
+              target="_blank"><%= spot.location%></a></h1>
+        </div>
+
+        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-600">
+          <i class="fa-solid fa-temperature-high w-6"></i>
+          <h1 class="px-2 text-sm">Air Temperature: <span
+              class="font-bold text-base"><%= celsiusToFar(spot.weather.temperature) %>°F </span></span></h1>
+        </div>
+
+        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-600">
+          <i class="fa-solid fa-water w-6"></i>
+          <h1 class="px-2 text-sm">Wave Height: <span
+              class="font-bold text-base"><%= metersToFeet(spot.weather.waveHeight) %>ft.</span></h1>
+        </div>
+
+
+
+        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-600">
+          <i class="fa-solid fa-wind w-6"></i>
+          <h1 class="px-2 text-sm">Winds: <span class="font-bold text-base"><%= kmToMiles(spot.weather.windSpeed) %>
+              mph
+              <%= getWindDirection(spot.weather.windDirection) %> </span></h1>
+        </div>
+
+        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-600">
+          <i class="fa-solid fa-cloud-showers-water w-6"></i>
+          <h1 class="px-2 text-sm">Precipitation: <span class="font-bold text-base"><%= spot.weather.precipitation %>
+              % </span></h1>
+        </div>
+
+        <div class="flex w-full sm:w-auto justify-end">
+          <a href="/spots/<%= spot.id %>"
+            class="w-full px-5 py-2 mt-6 text-sm tracking-wider text-white uppercase transition-colors duration-300 transform bg-blue-600 rounded-lg lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+            Details and Comments
+          </a>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
 </main>
-    
 
 <%- include('partials/footer') -%>
