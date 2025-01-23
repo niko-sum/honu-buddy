@@ -4,7 +4,7 @@ const fetchWeatherData = async(lat, lon) => {
         const locationResponse = await fetch(`https://api.weather.gov/points/${lat},${lon}`);
         const locationData = await locationResponse.json()
 
-        //Fetch url data
+        //Fetch data from url
         const gridDataResponse = await fetch(locationData.properties.forecastGridData);
         const gridData = await gridDataResponse.json();
 
@@ -12,10 +12,10 @@ const fetchWeatherData = async(lat, lon) => {
         const findCurrentValue = (values) => {
             // Get current time in HST
             const now = new Date();
-            const hstOffset = -10 * 60 * 60 * 1000; // Convert -10 hours to milliseconds
+            const hstOffset = -10 * 60 * 60 * 1000; // Convert -10 hours to milliseconds to convert to HST
             const nowHST = new Date(now.getTime() + (now.getTimezoneOffset() * 60 * 1000) + hstOffset);
 
-            // Sort values by validTime to ensure we get the most recent valid reading
+            // Sort values by validTime to get the most recent valid data
             const sortedValues = values.sort((a, b) => {
                 return new Date(b.validTime.split('/')[0]) - new Date(a.validTime.split('/')[0]);
             });

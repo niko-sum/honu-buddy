@@ -1,3 +1,5 @@
+//JQuery for smooth scrolling after button click to section
+
 $(document).ready(function () {
     $("#viewSnorkelingSpots").click(function () {
       $("html, body").animate(

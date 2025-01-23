@@ -3,17 +3,14 @@ const fetchWeatherData = require("../util/fetchWeather");
 const utils = require("../util/conversions");
 
 module.exports = {
-  // Exporting the getIndex function
   getIndex: (req, res) => {
     res.render("index.ejs");
   },
 
-  // Exporting the getProfile function
   getProfile: (req, res) => {
     res.render("profile", { user: req.user });
   },
 
-  // Exporting the getHome function
   getHome: async (req, res) => {
     try {
       // Fetch weather data for all snorkeling spots and map them to include weather data

@@ -1,13 +1,11 @@
-// controllers/spots.js
 const snorkelingSpots = require("../data/spots");
 const fetchWeatherData = require("../util/fetchWeather");
 const utils = require("../util/conversions");
 const Comment = require("../models/Comment");
 
 module.exports = {
-  // Exporting the getSpot function
   getSpot: async (req, res) => {
-    const spotId = req.params.spotId; // Get the spotId from the URL params
+    const spotId = req.params.spotId; // Get the spotId from the URL
     const spot = snorkelingSpots.find(s => s.id === spotId); // Find the spot by its ID
 
     if (spot) {
