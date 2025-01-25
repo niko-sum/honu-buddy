@@ -48,7 +48,7 @@
           <a href="/" class="btn btn-primary">Back to Home</a>
         </div>
       </div>
-      <div class="mt-4">
+      <div class="mt-4 ml-4">
         <% if (user) { %>
         <h2 class="text-white">Add a comment</h2>
         <form action="/comments/<%= spot.id %>" method="POST" enctype="multipart/form-data">
@@ -76,7 +76,7 @@
         <p class="text-white"><span class="font-bold text-blue-700 hover:underline transition-all duration-300"><a href="/login">Log in</span></a> to add a comment.</p>
         <% } %>
       </div>
-      <div class="mt-4">
+      <div class="mt-4 ml-4">
         <h3 class="text-white mb-8 font-bold">Community Comments</h3>
         <% comments.forEach(comment => { %>
         <div class="card border-t border-gray-600 pt-2">
