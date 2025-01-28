@@ -1,5 +1,4 @@
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>    -->
-<footer class="footer bg-base-200 text-base-content p-10">
+<footer x-data="{ modalFunctions, modalState: { open: false } }" class="footer bg-base-200 text-base-content p-10">
     <nav>
         <h6 class="footer-title">Useful links</h6>
         <a href="/snorkelguide" class="link link-hover">Snorkeling Safety and Guidelines</a>
@@ -10,19 +9,19 @@
         <h6 class="footer-title">Company</h6>
         <a class="link link-hover">About us</a>
         <a class="link link-hover">Contact</a>
-    </nav>
+        </nav> -->
     <nav>
         <h6 class="footer-title">Legal</h6>
-        <a class="link link-hover">Terms of use</a>
-        <a class="link link-hover">Privacy policy</a>
-        <a class="link link-hover">Cookie policy</a>
-    </nav> -->
+        <button @click="modalFunctions.toggleModal(window.modalState)" class="link link-hover">Disclaimer</button>
+        <!-- <a class="link link-hover">Privacy policy</a>
+        <a class="link link-hover">Cookie policy</a> -->
+    </nav>
 </footer>
 <footer class="footer bg-base-200 text-base-content border-base-300 border-t px-10 py-4">
     <aside class="grid-flow-col items-center">
         <img src="/imgs/Honu Buddy-logo/vector/honulogo.svg">
         <p>
-            Honu Buddy LLC
+            Honu Buddy
             <br />
             Keeping the ocean healthy for our aina
         </p>

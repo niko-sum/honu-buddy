@@ -22,3 +22,6 @@ html, body {
     margin: 0;
     padding: 0;
   }
+
+  /* Alpine.js code to prevent modal blip on page load */
+  [x-cloak] { display: none !important; }

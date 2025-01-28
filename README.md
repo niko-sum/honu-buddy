@@ -3,13 +3,13 @@
 <img src="https://github.com/niko-sum/Portfolio-Website/blob/main/images/honubuddy.gif" width="100%" alt="honubuddy"/>
 </a>
 
-Snorkeling guide featuring local hidden gems and live marine weather data for Maui, Hawai'i!
+Snorkeling resource guide featuring local hidden gems and live marine weather data for Maui, Hawai'i.
 
 **Link to project:** https://honubuddy.up.railway.app/
 
 ## How It's Made:
 
-**Tech used:** JavaScript, Tailwind, MongoDB, Express.js, Node.js, Passport.js, EJS, Cloudinary, Multer, HTML, CSS, RESTful API (NWS)
+**Tech used:** EJS, JavaScript, Tailwind, MongoDB, RESTful API (National Weather Service), Express.js, Node.js, Alpine.js Passport.js, Cloudinary, Multer
 
 Started with the 100devs binary-upload-boom as a template and stripped it down to leave the Passport.js configuration, MongoDB, Cloudinary, Multer, and the base MVC structure. I mapped out the website layout focusing on easy navigation while providing best ocean explporation practices through an educational lens for users. I explored numerous Tailwind component libraries including DaisyUI and MerakiUI and ended up combining elements from both. Bootstrap was creating conflicts with certain Tailwind classes so I ended up removing them.
 
@@ -34,6 +34,8 @@ Modularity - creating a local database and separating the JS logic/functions in 
 RESTful API and variables - having multiple data points contained in a variable and iterating through them not only reduced the lines of code needed but made for a more elegant data delivery process.
 
 Visual design - made multiple small tweaks on the front like having images and cards zoom over hover, adding shadows to make certain sections float from the background, and using gradient coloring allows for a sleeker and professional look
+
+Disclaimer modal- added a disclaimer that appears only on first page load via checking an object created in localStorage. Modal can be then toggled anytime via the Disclaimer button in the footer. Modal is a MerakiUI component and behavior is customized via Alpine.js directives.
 
 ## Lessons Learned:
 
